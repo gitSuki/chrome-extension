@@ -1,4 +1,4 @@
-# <img src="public/icons/icon_48.png" width="45" align="left"> Chrome Extension
+# chrome-extension
 
 My Chrome Extension
 
@@ -9,13 +9,14 @@ My Chrome Extension
 
 ## Install
 
-[**Chrome** extension]() <!-- TODO: Add chrome extension link inside parenthesis -->
+[Chrome extension]() <!-- TODO: Add chrome extension link inside parenthesis -->
 
-## Contribution
+## Technologies
 
-Suggestions and pull requests are welcomed!.
+- JavaScript
+- Webpack
+- Prettier
+- chrome-extension-cli
 
----
-
-This project was bootstrapped with [Chrome Extension CLI](https://github.com/dutiyesh/chrome-extension-cli)
+## Preview
 

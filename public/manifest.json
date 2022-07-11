@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "Chrome Extension",
+  "name": "Japanese Subtitles Search Extension",
   "version": "0.1.0",
-  "description": "Japanese Subtitles Search Extension",
+  "description": "",
   "background": {
     "service_worker": "background.js"
   },

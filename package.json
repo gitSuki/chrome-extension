@@ -1,7 +1,7 @@
 {
   "name": "chrome-extension",
   "version": "0.1.0",
-  "description": "My Chrome Extension",
+  "description": "Japanese Subtitles Search Extension",
   "private": true,
   "scripts": {
     "watch": "webpack --mode=development --watch --config config/webpack.config.js",
