@@ -1,6 +1,19 @@
 'use strict';
+const searchbar = document.getElementById('searchbar');
+const malButton = document.getElementById('myanimelist')
+const anilistButton = document.getElementById('anilist')
+const searchResultsContainer = document.getElementById('container');
 
-import './popup.css';
+searchbar.addEventListener('keyup', async () => {
+  const animeID = searchbar.value
+  if (malButton.checked){
+      searchResultsContainer.textContent = "MAL: " + animeID;
+  }
+  else if (anilistButton.checked) {
+      searchResultsContainer.textContent = "Anilist: " + animeID;
+  }
+})
+
 
 (function () {
   // We will make use of Storage API to get and store `count` value
