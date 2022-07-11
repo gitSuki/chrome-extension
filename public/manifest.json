@@ -1,0 +1,27 @@
+{
+  "manifest_version": 3,
+  "name": "Chrome Extension",
+  "version": "0.1.0",
+  "description": "Japanese Subtitles Search Extension",
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_title": "Chrome Extension",
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "storage"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "run_at": "document_idle",
+      "js": [
+        "contentScript.js"
+      ]
+    }
+  ]
+}
