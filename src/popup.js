@@ -3,6 +3,7 @@ const searchbar = document.getElementById('searchbar');
 const malButton = document.getElementById('myanimelist');
 const anilistButton = document.getElementById('anilist');
 const searchResultsContainer = document.getElementById('container');
+const delay = milliseconds => new Promise(res => setTimeout(res, milliseconds));
 
 (function getAnimeSitePreference (){
   chrome.storage.sync.get(['preference'], result => {
@@ -16,6 +17,7 @@ const searchResultsContainer = document.getElementById('container');
 })()
 
 searchbar.addEventListener('keyup', async () => {
+  await delay(500);
   const animeID = searchbar.value;
   if (malButton.checked){
       searchResultsContainer.textContent = "MAL: " + animeID;

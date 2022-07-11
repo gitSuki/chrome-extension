@@ -14,8 +14,11 @@ My Chrome Extension
 ## Technologies
 
 - JavaScript
+- HTML/CSS
+- Jest
 - Webpack
 - Prettier
+- jikan (MyAnimeList REST API)
 - chrome-extension-cli
 
 ## Preview
