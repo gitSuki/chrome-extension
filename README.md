@@ -18,7 +18,8 @@ My Chrome Extension
 - Jest
 - Webpack
 - Prettier
-- jikan (MyAnimeList REST API)
+- jikanv4 (MyAnimeList REST API)
+- AniList v2 GraphQL API
 - chrome-extension-cli
 
 ## Preview

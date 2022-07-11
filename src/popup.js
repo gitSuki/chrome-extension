@@ -1,4 +1,6 @@
 'use strict';
+const mal = require('./malFetch')
+const anilist = require('./anilistFetch')
 const searchbar = document.getElementById('searchbar');
 const malButton = document.getElementById('myanimelist');
 const anilistButton = document.getElementById('anilist');
@@ -17,13 +19,18 @@ const delay = milliseconds => new Promise(res => setTimeout(res, milliseconds));
 })()
 
 searchbar.addEventListener('keyup', async () => {
-  await delay(500);
   const animeID = searchbar.value;
   if (malButton.checked){
       searchResultsContainer.textContent = "MAL: " + animeID;
+      await delay(500);
+      const animeData = await mal.fetchAnimeByID(animeID);
+      searchResultsContainer.textContent = animeData.data.title
   }
   else if (anilistButton.checked) {
       searchResultsContainer.textContent = "Anilist: " + animeID;
+      await delay(500);
+      const animeData = await anilist.fetchAnimeByID(anilist.query, {id:animeID});
+      searchResultsContainer.textContent = animeData.title.english
   }
 })
 
