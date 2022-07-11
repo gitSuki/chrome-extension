@@ -20,19 +20,25 @@ const delay = milliseconds => new Promise(res => setTimeout(res, milliseconds));
 
 searchbar.addEventListener('keyup', async () => {
   const animeID = searchbar.value;
+  await delay(500); // to allow users enough time to type in their search query
   if (malButton.checked){
-      searchResultsContainer.textContent = "MAL: " + animeID;
-      await delay(500);
-      const animeData = await mal.fetchAnimeByID(animeID);
-      searchResultsContainer.textContent = animeData.data.title
+    malSearch(animeID);
+      
   }
   else if (anilistButton.checked) {
-      searchResultsContainer.textContent = "Anilist: " + animeID;
-      await delay(500);
-      const animeData = await anilist.fetchAnimeByID(anilist.query, {id:animeID});
-      searchResultsContainer.textContent = animeData.title.english
+    anilistSearch(animeID);
   }
 })
+
+async function malSearch(animeID){
+  const animeData = await mal.fetchAnimeByID(animeID);
+  searchResultsContainer.textContent = animeData.data.title;
+}
+
+async function anilistSearch(animeID){
+  const animeData = await anilist.fetchAnimeByID(anilist.query, {id:animeID});
+  searchResultsContainer.textContent = animeData.title.english;
+}
 
 malButton.addEventListener('click', () => {
   saveAnimeSitePreference(malButton.id);
