@@ -1,32 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>My Chrome Extension</title>
-    <link rel="stylesheet" href="popup.css" />
-  </head>
-  <body>
-    <div class="app">
-      <p class="counter-label">Counter</p>
-      <div id="counter" class="counter"></div>
-      <div class="button-container">
-        <button id="decrementBtn" class="button">-</button>
-        <button id="incrementBtn" class="button">+</button>
-      </div>
+<link href="popup.css" rel="stylesheet"/>
+<script type="module" src="popup.js"></script>
 
-      <hr class="divider" />
-
-      <p class="title">Chrome Extension is Ready!</p>
-      <p class="subtitle">Start by updating <code>popup.html</code></p>
-    </div>
-
-    <script src="popup.js"></script>
-
-    <!--
-      This HTML file opens when you click on icon from the toolbar.
-
-      To begin the development, run `npm run watch`.
-      To create a production bundle, use `npm run build`.
-    -->
-  </body>
-</html>
+<div id="wrapper">
+    <h1 id="title">Japanese Subtitles Search Extensions</h1>
+    <form>
+        <div id="buttons">
+            <input type="radio" id="myanimelist" name="destination">
+            <label for="myanimelist">MyAnimeList</label>
+            <input type="radio" id="anilist" name="destination" checked>
+            <label for="anilist">Anilist</label>
+        </div>
+        <input type="text" name="searchbar" id="searchbar" placeholder="Search an anime ID...">
+        <div id="container"></div>
+    </form>
+</div>
