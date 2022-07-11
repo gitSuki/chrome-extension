@@ -4,7 +4,7 @@ const malButton = document.getElementById('myanimelist');
 const anilistButton = document.getElementById('anilist');
 const searchResultsContainer = document.getElementById('container');
 
-(function getWebsitePreference (){
+(function getAnimeSitePreference (){
   chrome.storage.sync.get(['preference'], result => {
     if (result.preference === malButton.id){
       malButton.checked = true;
@@ -26,15 +26,15 @@ searchbar.addEventListener('keyup', async () => {
 })
 
 malButton.addEventListener('click', () => {
-  saveWebsitePreference(malButton.id);
+  saveAnimeSitePreference(malButton.id);
 })
 
 anilistButton.addEventListener('click', () => {
-  saveWebsitePreference(anilistButton.id);
+  saveAnimeSitePreference(anilistButton.id);
 })
 
-function saveWebsitePreference (websitePreference){
-  chrome.storage.sync.set({preference: websitePreference});
+function saveAnimeSitePreference (animeSitePreference){
+  chrome.storage.sync.set({preference: animeSitePreference});
 }
 
 
