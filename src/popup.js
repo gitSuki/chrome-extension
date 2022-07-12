@@ -7,7 +7,8 @@ const anilistButton = document.getElementById('anilist');
 const searchResultsContainer = document.getElementById('container');
 const delay = milliseconds => new Promise(res => setTimeout(res, milliseconds));
 
-(function getAnimeSitePreference (){
+(function loadStorageData (){
+  // loads the users site preference from storage
   chrome.storage.sync.get(['preference'], result => {
     if (result.preference === malButton.id){
       malButton.checked = true;
@@ -15,43 +16,60 @@ const delay = milliseconds => new Promise(res => setTimeout(res, milliseconds));
     else {
       anilistButton.checked = true;
     }
-  });
+  })
+  // loads the users previous search from storage
+  chrome.storage.sync.get(['search'], result => {
+    searchbar.value = result.search;
+    animeSearch(result.search)
+  })
 })()
 
 searchbar.addEventListener('keyup', async () => {
+  // calls helper search function when the user inputs into the searchbar
   const animeID = searchbar.value;
   await delay(500); // to allow users enough time to type in their search query
+  animeSearch(animeID)
+})
+
+async function animeSearch(query){
+  // redirects to helper functions based on which radio button is selected
   if (malButton.checked){
-    malSearch(animeID);
-      
+    malSearch(query);   
   }
   else if (anilistButton.checked) {
-    anilistSearch(animeID);
+    anilistSearch(query);
   }
-})
+}
 
 async function malSearch(animeID){
   const animeData = await mal.fetchAnimeByID(animeID);
   searchResultsContainer.textContent = animeData.data.title;
+  saveSearchData(animeID)
 }
 
 async function anilistSearch(animeID){
   const animeData = await anilist.fetchAnimeByID(anilist.query, {id:animeID});
   searchResultsContainer.textContent = animeData.title.english;
+  saveSearchData(animeID)
 }
 
 malButton.addEventListener('click', () => {
   saveAnimeSitePreference(malButton.id);
+  animeSearch(searchbar.value);
 })
 
 anilistButton.addEventListener('click', () => {
   saveAnimeSitePreference(anilistButton.id);
+  animeSearch(searchbar.value);
 })
 
 function saveAnimeSitePreference (animeSitePreference){
   chrome.storage.sync.set({preference: animeSitePreference});
 }
 
+function saveSearchData (searchData){
+  chrome.storage.sync.set({search: searchData});
+}
 
 // (function () {
 //   // We will make use of Storage API to get and store `count` value
