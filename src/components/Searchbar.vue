@@ -9,10 +9,11 @@
       <label for="kitsunekko">Kitsunekko</label>
     </div>
     <input type="text" @keypress="onKeypress()" v-model="input" placeholder="Search for an Anime...">
-    <div v-for="anime in filteredList()" :key="anime">
-      <p>{{anime}}</p>
+
+    <div v-for="animeTitle in filteredAnimeList()" :key="animeTitle">
+      <p>{{animeTitle}}</p>
     </div>
-    <div class="item error" v-if="input&&!filteredList().length">
+    <div class="item error" v-if="input&&!filteredAnimeList().length">
       <p>No results found!</p>
     </div>
   </form>
@@ -24,14 +25,14 @@ import { ref } from "vue"
 let input = ref("");
 const animes = ["Spy x Family", "Ya Boy Kongming", "Schwarzesmarken"];
 
-function filteredList() {
+function filteredAnimeList() {
   return animes.filter((anime) =>
     anime.toLowerCase().includes(input.value.toLowerCase())
   );
 }
 
 function onKeypress(){
-  this.animes = filteredList()
+  this.animes = filteredAnimeList()
 }
 
 export default {
@@ -43,8 +44,8 @@ export default {
     }
   },
   methods: {
-    onKeypress: onKeypress,
-    filteredList: filteredList
+    filteredAnimeList: filteredAnimeList,
+    onKeypress: onKeypress
   }
 }
 </script>

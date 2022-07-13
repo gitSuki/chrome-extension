@@ -1,18 +1,26 @@
 <template>
   <div id="main-app">
     <div id="header">
-      <Title :text="msg"/>
+      <Title :title="headerTitle"/>
       <Searchbar/>
+      <Button @generate-kitsunekko-data="generateKitsunekkoData()"/>
     </div>
   </div>
 </template>
 
 <script>
+const kitsunekkoURL = 'https://kitsunekko.net/dirlist.php?dir=subtitles%2Fjapanese%2F';
+
 export default {
   name: 'popupView',
   data () {
     return {
-      msg: 'Hello World'
+      headerTitle: 'Anime JPSub Finder'
+    }
+  },
+  methods: {
+    generateKitsunekkoData(){
+      chrome.runtime.sendMessage(kitsunekkoURL);
     }
   }
 }
