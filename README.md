@@ -1,26 +1,24 @@
 # chrome-extension
 
-My Chrome Extension
+## Project setup
+```
+npm install
+```
 
-## Features
+### Compiles and hot-reloads for development
+```
+npm run serve
+```
 
-- Feature 1
-- Feature 2
+### Compiles and minifies for production
+```
+npm run build
+```
 
-## Install
+### Run your unit tests
+```
+npm run test:unit
+```
 
-[Chrome extension]() <!-- TODO: Add chrome extension link inside parenthesis -->
-
-## Technologies
-
-- JavaScript
-- HTML/CSS
-- Jest
-- Webpack
-- Prettier
-- jikanv4 (MyAnimeList REST API)
-- AniList v2 GraphQL API
-- chrome-extension-cli
-
-## Preview
-
+### Customize configuration
+See [Configuration Reference](https://cli.vuejs.org/config/).
