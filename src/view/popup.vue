@@ -1,7 +1,9 @@
 <template>
   <div id="main-app">
-    <Title :text="msg"/>
-    <Searchbar/>
+    <div id="header">
+      <Title :text="msg"/>
+      <Searchbar/>
+    </div>
   </div>
 </template>
 
