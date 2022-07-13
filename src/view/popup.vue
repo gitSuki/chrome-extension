@@ -1,6 +1,6 @@
 <template>
-  <div class="main_app">
-    <h1>Hello {{msg}}</h1>
+  <div id="main-app">
+    <Title :text="msg"/>
   </div>
 </template>
 
@@ -9,15 +9,14 @@ export default {
   name: 'popupView',
   data () {
     return {
-      msg: 'popup'
+      msg: 'Hello World'
     }
   }
 }
-
 </script>
 
 <style>
-.main_app {
+#main-app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
