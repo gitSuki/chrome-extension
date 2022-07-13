@@ -1,5 +1,16 @@
 # chrome-extension
 
+Description
+
+## Features
+* Feature 1
+
+## Technologies
+* Vue (Javascript/HTML/CSS)
+* Vue CLI & Vue CLI Plugin Chrome Extension CLI
+* Node.js
+* Babel
+
 ## Project setup
 ```
 npm install
