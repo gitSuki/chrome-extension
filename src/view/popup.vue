@@ -10,6 +10,7 @@
 
 <script>
 const kitsunekkoURL = 'https://kitsunekko.net/dirlist.php?dir=subtitles%2Fjapanese%2F';
+const kitsunekkoBaseURL = 'https://kitsunekko.net';
 
 export default {
   name: 'popupView',
@@ -19,8 +20,18 @@ export default {
     }
   },
   methods: {
-    generateKitsunekkoData(){
-      chrome.runtime.sendMessage(kitsunekkoURL);
+    async generateKitsunekkoData(){
+      // gathers html data from Kitsunekko
+      const response = await fetch(kitsunekkoURL)
+      const data = await response.text()
+      // parse through the HTML data 
+      const kitsunekkoHTML = document.createElement('html');
+      kitsunekkoHTML.innerHTML = data;
+      const animeRows = kitsunekkoHTML.getElementsByTagName('tr');
+      let subsDict = [...animeRows].map(tr => ({
+        'animeTitle': tr.firstChild.textContent,
+        'href': kitsunekkoBaseURL + tr.firstChild.firstChild.pathname + tr.firstChild.firstChild.search,
+      }));
     }
   }
 }
