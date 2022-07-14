@@ -3,7 +3,7 @@
     <div id="header">
       <Title :title="headerTitle"/>
       <Searchbar/>
-      <Button @generate-kitsunekko-data="generateKitsunekkoData()"/>
+      <Button @click="onclick()"/>
     </div>
   </div>
 </template>
@@ -12,26 +12,33 @@
 const kitsunekkoURL = 'https://kitsunekko.net/dirlist.php?dir=subtitles%2Fjapanese%2F';
 const kitsunekkoBaseURL = 'https://kitsunekko.net';
 
+async function generateKitsunekkoData(){
+  const response = await fetch(kitsunekkoURL)
+  const data = await response.text()
+  // parse through the HTML data 
+  const kitsunekkoHTML = document.createElement('html');
+  kitsunekkoHTML.innerHTML = data;
+  const animeRows = kitsunekkoHTML.getElementsByTagName('tr');
+  let subsDict = [...animeRows].map(tr => ({
+    'animeTitle': tr.firstChild.textContent,
+    'href': kitsunekkoBaseURL + tr.firstChild.firstChild.pathname + tr.firstChild.firstChild.search,
+  }));
+  chrome.runtime.sendMessage("Data loaded")
+  return subsDict;
+}
+
+const kitsunekkoData = generateKitsunekkoData()
+
 export default {
   name: 'popupView',
   data () {
     return {
-      headerTitle: 'Anime JPSub Finder'
+      headerTitle: 'Anime JPSub Finder',
     }
   },
   methods: {
-    async generateKitsunekkoData(){
-      // gathers html data from Kitsunekko
-      const response = await fetch(kitsunekkoURL)
-      const data = await response.text()
-      // parse through the HTML data 
-      const kitsunekkoHTML = document.createElement('html');
-      kitsunekkoHTML.innerHTML = data;
-      const animeRows = kitsunekkoHTML.getElementsByTagName('tr');
-      let subsDict = [...animeRows].map(tr => ({
-        'animeTitle': tr.firstChild.textContent,
-        'href': kitsunekkoBaseURL + tr.firstChild.firstChild.pathname + tr.firstChild.firstChild.search,
-      }));
+    onclick(){
+      chrome.runtime.sendMessage("Click!")
     }
   }
 }
