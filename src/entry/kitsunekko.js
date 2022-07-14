@@ -1,6 +1,6 @@
 const url = 'https://kitsunekko.net/dirlist.php?dir=subtitles%2Fjapanese%2F';
 const baseURL = 'https://kitsunekko.net';
-module.exports = { url, baseURL, fetchData, parseData, cacheData, getCache }
+module.exports = { getData }
 
 async function fetchData(){
   const response = await fetch(url)
@@ -25,9 +25,9 @@ function cacheData(data){
   chrome.storage.local.set({kitsunekkoCache: data});
 }
 
-function getCache(){
-  chrome.storage.local.get(['kitsunekkoCache'], result => {
-    chrome.runtime.sendMessage(result)
-    chrome.runtime.sendMessage("Cache data retrieved")
-  });
+async function getData(){
+  const data = await fetchData()
+  const parsedData = parseData(data)
+  cacheData(parsedData)
+  return parsedData
 }

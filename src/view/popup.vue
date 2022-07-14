@@ -10,11 +10,14 @@
 
 <script>
 const kitsunekko = require('../entry/kitsunekko.js')
+let kitsunekkoData = []
 
 async function getKitsunekkoData(){
-  const data = await kitsunekko.fetchData()
-  const parsedData = kitsunekko.parseData(data)
-  kitsunekko.cacheData(parsedData)
+  // pulls cached kitsunekko data
+  chrome.storage.local.get(['kitsunekkoCache'], result => {
+    kitsunekkoData = result.kitsunekkoCache
+  })
+  if (kitsunekkoData == null) kitsunekkoData = await kitsunekko.getData()
 }
 
 getKitsunekkoData()
@@ -28,7 +31,8 @@ export default {
   },
   methods: {
     onclick(){
-      chrome.runtime.sendMessage("Click!")
+      chrome.runtime.sendMessage("Current data:")
+      chrome.runtime.sendMessage(kitsunekkoData)
     }
   }
 }
